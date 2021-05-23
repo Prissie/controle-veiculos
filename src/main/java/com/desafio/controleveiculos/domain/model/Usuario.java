@@ -11,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -21,13 +24,19 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@NotBlank
+	@Size(max = 60)
 	private String nome;
 	
+	@NotBlank
+	@Email
+	@Size(max = 25)
 	@Column(unique = true)
 	private String email;
 
-	@Column(nullable = false, unique = true, length = 11)
+	@NotBlank
+	@Size(max = 11)
+	@Column(unique = true)
 	private String cpf;
 
 	@Column(nullable = false)
