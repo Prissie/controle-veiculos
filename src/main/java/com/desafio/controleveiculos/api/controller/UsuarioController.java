@@ -1,23 +1,47 @@
 package com.desafio.controleveiculos.api.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+//import io.swagger.v3.oas.annotations.Operation;
 
 import com.desafio.controleveiculos.domain.model.Usuario;
+import com.desafio.controleveiculos.domain.repository.UsuarioRepository;
 
 @RestController
+@RequestMapping("api/v1/usuarios")
 public class UsuarioController {
 	
-	@GetMapping("/usuarios")
-	public List<Usuario> listar() {
-		Usuario usuario1 = new Usuario();
-		usuario1.setNome("João de Deus");
-		usuario1.setCpf("32202020021");
-		usuario1.setEmail("joao@email.com");
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 		
-		return Arrays.asList(usuario1);
+//	@Operation(summary = "Listar todos usuários")
+	@GetMapping
+	public List<Usuario> listar() {		
+		return usuarioRepository.findAll();
 	}
+	
+	@GetMapping("/{usuarioId}")
+	public ResponseEntity<Usuario> buscar(@PathVariable Long usuarioId) {		
+		
+		return usuarioRepository.findById(usuarioId)
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Usuario cadastrarUsuario(@RequestBody Usuario usuario) {
+		return usuarioRepository.save(usuario);
+	}
+
 }
