@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.controleveiculos.domain.model.Usuario;
 import com.desafio.controleveiculos.domain.repository.UsuarioRepository;
+import com.desafio.controleveiculos.domain.service.UsuarioService;
 
 @RestController
 @RequestMapping("api/v1/usuarios")
@@ -25,6 +26,8 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	private UsuarioService usuarioService;
 		
 //	@Operation(summary = "Listar todos usuários")
 	@GetMapping
@@ -43,7 +46,8 @@ public class UsuarioController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario cadastrarUsuario(@Valid @RequestBody Usuario usuario) {
-		return usuarioRepository.save(usuario);
+		return usuarioService.salvar(usuario);
 	}
+	
 
 }
