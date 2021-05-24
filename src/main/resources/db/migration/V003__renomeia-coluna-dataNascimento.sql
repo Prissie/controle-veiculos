@@ -1,0 +1,1 @@
+alter table usuario change column data_nascimento dataNascimento DATE;
