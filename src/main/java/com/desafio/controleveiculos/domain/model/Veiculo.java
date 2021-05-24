@@ -1,7 +1,5 @@
 package com.desafio.controleveiculos.domain.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +28,7 @@ public class Veiculo {
 	private String modelo;
 
 	@Column(nullable = false)
-	private LocalDate ano;
+	private String ano;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -53,11 +51,11 @@ public class Veiculo {
 		this.modelo = modelo;
 	}
 
-	public LocalDate getAno() {
+	public String getAno() {
 		return ano;
 	}
 
-	public void setAno(LocalDate ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
 	}
 
