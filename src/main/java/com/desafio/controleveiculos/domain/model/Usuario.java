@@ -80,13 +80,26 @@ public class Usuario {
 	}
 
 	public void setDataNascimento(LocalDate dataNascimento) {
+		//LocalDate date = LocalDate.parse(dataNascimento);
 		this.dataNascimento = dataNascimento;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Long getId() {
 		return id;
 	}
 	
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", cpf=" + cpf + ", dataNascimento="
